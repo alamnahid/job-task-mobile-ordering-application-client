@@ -27,6 +27,7 @@ const Navbar = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className=" menu-horizontal px-1">
                         <li><NavLink className={({ isActive }) => isActive ? 'btn btn-neutral text-base border-none bg-[#1C3988] text-white' : 'text-lg font-medium btn bg-white border-none shadow-none'} to='/'>Home</NavLink></li>
+                        <li><NavLink className={({ isActive }) => isActive ? 'btn btn-neutral text-base border-none bg-[#1C3988] text-white' : 'text-lg font-medium btn bg-white border-none shadow-none'} to='/add-mobile'>Add Mobile</NavLink></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
