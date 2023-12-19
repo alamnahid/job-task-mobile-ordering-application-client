@@ -1,7 +1,9 @@
 import AdvertiseBanner from "./AdvertiseBanner/AdvertiseBanner";
 import Banner from "./Banner/Banner";
+import CustomerService from "./CustomerService/CustomerService";
 import FeatureProduct from "./FeatureProduct/FeatureProduct";
 import OurService from "./OurService/OurService";
+import TopBrans from "./TopBrands/TopBrans";
 
 
 const HomePage = () => {
@@ -11,6 +13,8 @@ const HomePage = () => {
             <OurService/>
             <FeatureProduct/>
             <AdvertiseBanner/>
+            <CustomerService/>
+            <TopBrans/>
             
         </div>
     );
