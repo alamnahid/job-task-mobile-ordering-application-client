@@ -6,7 +6,7 @@ const AllMobileCard = ({phone}) => {
     return (
         <div className="w-[21.875rem] h-[26.25rem] rounded-tr-[3rem] shadow-md hover:shadow-2xl hover:shadow-[#1C3988] hover:cursor-grab bg-white">
                 <div className="w-[21.875rem] rounded-tr-[3rem] h-[15.5625rem] relative">
-                <img className="w-[21.875rem] rounded-tr-[3rem] h-[15.5625rem]" src={phone?.image} alt="" />
+                <img className="w-[11.875rem] rounded-tr-[3rem] h-[15.5625rem] mx-auto" src={phone?.image} alt="" />
 
                 <div className="w-[10rem] h-[2.6rem] bg-[#1C3988] flex justify-center items-center rounded-r-lg absolute bottom-0">
                     <h1 className="text-white text-xl font-medium">{phone?.brandname}</h1>

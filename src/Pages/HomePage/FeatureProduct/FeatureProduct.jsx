@@ -4,8 +4,19 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const FeatureProduct = () => {
+    const axiosPublic = useAxiosPublic()
+    const { data: mobile = [] } = useQuery({
+        queryKey: ['mobile'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/allmobile`)
+            return res.data;
+        }
+    })
+    console.log(mobile)
     return (
         <div className="mt-20 mx-[10%]">
             <div className="flex justify-between items-center">
@@ -40,21 +51,12 @@ const FeatureProduct = () => {
                         }}
 
                     >
-                        <SwiperSlide className='pb-12'>
-                            <FeatureProductCard />
-                        </SwiperSlide>
-                        <SwiperSlide className='pb-12'>
-                            <FeatureProductCard />
-                        </SwiperSlide>
-                        <SwiperSlide className='pb-12'>
-                            <FeatureProductCard />
-                        </SwiperSlide>
-                        <SwiperSlide className='pb-12'>
-                            <FeatureProductCard />
-                        </SwiperSlide>
-                        <SwiperSlide className='pb-12'>
-                            <FeatureProductCard />
-                        </SwiperSlide>
+                        {
+                            mobile.slice(0,8)?.map(phone=><SwiperSlide key={phone._id} className='pb-12'>
+                            <FeatureProductCard phone={phone} />
+                        </SwiperSlide>)
+                        }
+                        
 
                     </Swiper>
 

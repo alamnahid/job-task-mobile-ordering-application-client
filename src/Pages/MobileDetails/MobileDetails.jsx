@@ -3,13 +3,16 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { FaCarSide, FaCartPlus, FaShoppingBag, FaSignInAlt } from "react-icons/fa";
 import Zoom from "react-img-hover-zoom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/usecart";
 
 const MobileDetails = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const {id} = useParams();
     const axiosPublic = useAxiosPublic()
     const { user} = useContext(AuthContext)
@@ -18,7 +21,7 @@ const MobileDetails = () => {
     const axiosSecure = useAxiosSecure();
     const [, refetch] = useCart();
 
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ['mobile', id],
         queryFn: async () => {
             const res = await axiosPublic.get(`/allmobile/${id}`)
@@ -26,7 +29,7 @@ const MobileDetails = () => {
         }
     })
 
-    const handleAddtoCart = (mobile)=>{
+    const handleAddtoCart = ()=>{
         if(user && user.email){
         
             const cartItem = {

@@ -11,8 +11,8 @@ const AllMobile = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-    const [search, setSearch] = useState('')
     const axiosPublic = useAxiosPublic()
+    const [search, setSearch] = useState('')
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [count, setCount] = useState(0)
