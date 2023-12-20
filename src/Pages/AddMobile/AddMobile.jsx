@@ -17,13 +17,14 @@ const AddMobile = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
 
     const { mutate } = useMutation({
         mutationKey: ['mobile'],
         mutationFn: (addingData) => {
-            return axios.post('http://localhost:5000/addmobile', addingData, { withCredentials: true, })
+            return axios.post('https://job-task-mobile-ordering-application-server.vercel.app/addmobile', addingData, { withCredentials: true, })
         },
         onSuccess: () => {
             Swal.fire({
@@ -36,6 +37,7 @@ const AddMobile = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // navigate('/')
+                    reset();
                 }
             });
         }

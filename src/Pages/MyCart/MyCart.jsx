@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 import deleteicon from "../../assets/icon/delete.svg"
 import useCart from "../../hooks/usecart";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useMutation } from "@tanstack/react-query";
@@ -18,7 +17,7 @@ const MyCart = () => {
   const { mutate } = useMutation({
     mutationKey: ['orders'],
     mutationFn: (addingData) => {
-        return axios.post('http://localhost:5000/orders', addingData, { withCredentials: true, })
+        return axios.post('https://job-task-mobile-ordering-application-server.vercel.app/orders', addingData, { withCredentials: true, })
     },
     onSuccess: () => {
         Swal.fire({
@@ -89,8 +88,8 @@ const MyCart = () => {
 
 
       <div className="flex justify-between items-center ">
-        <h1 className="text-black lg:text-[2rem] cin font-bold">Items: {cart.length}</h1>
-        <h1 className="text-black lg:text-[2rem] cin font-bold">Total Price: ${totalPrice}</h1>
+        <h1 className="text-black lg:text-[2rem] lg:font-bold">Items: {cart.length}</h1>
+        <h1 className="text-black lg:text-[2rem] lg:font-bold">Total Price: ${totalPrice}</h1>
         {
           cart.length ? <button onClick={handlePlaceOrder} className="btn btn-neutral text-white text-xl bg-[#1C3988] border-none">Place Order</button>
           :
@@ -104,9 +103,10 @@ const MyCart = () => {
       <div className="rounded-tl-2xl rounded-tr-2xl">
 
         <div className="overflow-x-auto rounded-tl-2xl rounded-tr-2xl">
-          <table className="table mt-10 rounded-tl-2xl rounded-tr-2xl">
+          {
+            cart.length>0 ? <table className="table mt-10 rounded-tl-2xl rounded-tr-2xl">
             {/* head */}
-            <thead className="bg-[#1C3988] h-[4.5rem] rounded-tl-2xl rounded-tr-2xl text-white font-semibold text-lg">
+            <thead className="bg-[#1C3988] h-[4.5rem] rounded-tl-2xl rounded-tr-2xl text-white font-semibold lg:text-lg">
               <tr>
                 <th>
                   
@@ -145,6 +145,12 @@ const MyCart = () => {
               }
             </tbody>
           </table>
+
+          :
+          <div>
+            <h1 className="text-2xl text-center mt-12">You have not added any product yet</h1>
+          </div>
+          }
         </div>
 
       </div>

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { FaHome } from "react-icons/fa";
 import { useNavigate, useRouteError } from "react-router-dom";
 
-
 const ErrorElement = () => {
     const error = useRouteError();
     const navigate = useNavigate()

@@ -8,6 +8,7 @@ import AllMobile from "../Pages/AllMobile/AllMobile";
 import MobileDetails from "../Pages/MobileDetails/MobileDetails";
 import MyCart from "../Pages/MyCart/MyCart";
 import ErrorElement from "../Components/ErrorElement/ErrorElement";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
         },
         {
           path: '/cart',
-          element: <MyCart/>
+          element: <PrivateRoutes><MyCart/></PrivateRoutes>
         }
       ]
     },

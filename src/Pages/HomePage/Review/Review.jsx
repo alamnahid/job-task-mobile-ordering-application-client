@@ -8,7 +8,7 @@ const Review = () => {
     return (
         <div className="my-20 px-4 lg:ml-[10%]">
             <h1 className="text-[#091638] text-3xl lg:text-[3.2425rem] font-semibold  ">What Our Customers Say</h1>
-            <p className="text-[#091638] text-xs lg:text-[1.1rem] mt-6 lg:w-[70vw] leading-6">Explore the firsthand experiences of our valued customers in the Mobile Shop review section. From seamless shopping experiences to unbeatable prices, our customers share their thoughts on why Mobile Shop is their preferred destination for all things mobile. Discover why our community trusts us for top-notch service and exceptional products. </p>
+            <p className="text-[#091638] text-xs lg:text-[1.1rem] mt-8 lg:w-[70vw] leading-6">Explore the firsthand experiences of our valued customers in the Mobile Shop review section. From seamless shopping experiences to unbeatable prices, our customers share their thoughts on why Mobile Shop is their preferred destination for all things mobile. Discover why our community trusts us for top-notch service and exceptional products. </p>
 
 
             <div>

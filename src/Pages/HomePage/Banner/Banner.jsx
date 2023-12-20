@@ -34,9 +34,9 @@ const Banner = () => {
                 <button className="capitalize w-[18rem] h-14 btn-secondary bg-[#1C3988] border-none rounded-lg text-white mt-8 text-xl">Explore Now</button>
             </div>
             <div className="flex justify-center items-baseline lg:w-[50%]">
-                <img className="w-[7rem] lg:w-[20rem] h-[12rem] lg:h-auto" src={mobilecover1} alt=""/>
-                <img className="w-[9rem] lg:w-[23rem] h-[16rem] lg:h-auto" src={mobilecover2} alt=""/>
-                <img className="w-[7rem] lg:w-[20rem] h-[12rem] lg:h-auto" src={mobilecover3} alt=""/>
+                <img data-aos="flip-down"  data-aos-duration="1800" className="w-[7rem] lg:w-[20rem] h-[12rem] lg:h-auto" src={mobilecover1} alt=""/>
+                <img data-aos="flip-down"  data-aos-duration="1800" className="w-[9rem] lg:w-[23rem] h-[16rem] lg:h-auto" src={mobilecover2} alt=""/>
+                <img data-aos="flip-down"  data-aos-duration="1800" className="w-[7rem] lg:w-[20rem] h-[12rem] lg:h-auto" src={mobilecover3} alt=""/>
             </div>
             
         </div>

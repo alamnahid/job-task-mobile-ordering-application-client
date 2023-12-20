@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import AllMobileCard from "./AllMobileCard";
+import Loading from "../../Components/Loading/Loading";
 
 const AllMobile = () => {
     useEffect(() => {
@@ -27,7 +28,7 @@ const AllMobile = () => {
         const search = e.target.search.value;
         setSearch(search)
     }
-    const { data: mobile = [], refetch } = useQuery({
+    const { data: mobile = [], refetch, isLoading } = useQuery({
         queryKey: ['mobile', search, currentPage, itemsPerPage, brandName, mobiletype, mobileProcessor, mobileStorage, asc],
         queryFn: async () => {
             const res = await axiosPublic.get(`/allmobile?modelname=${search.toString()}&page=${currentPage}&size=${itemsPerPage}&brandname=${brandName}&type=${mobiletype}&processor=${mobileProcessor}&storage=${mobileStorage}&sort=${asc ? 'asc' : 'des'}`)
@@ -76,6 +77,10 @@ const AllMobile = () => {
         refetch()
     }
 
+    if(isLoading){
+        return <Loading/>
+    }
+
 
     return (
         <div className=" mt-8">
@@ -83,8 +88,8 @@ const AllMobile = () => {
             <div className="bg-[#F3F3FA] py-8  rounded-md">
                 {/* <p>{house.length}</p> */}
 
-                <h1 className=" text-center text-[3rem] font-semibold text-[#141B2D]">Explore the Latest Mobiles</h1>
-                <p className="text-center text-[#141B2D] text-[1.2rem] sans mt-3 w-[50vw] mx-auto">Discover a wide range of cutting-edge mobile phones with advanced features, stunning designs, and powerful performance.</p>
+                <h1 className=" text-center text-2xl lg:text-[3rem] font-semibold text-[#141B2D]">Explore the Latest Mobiles</h1>
+                <p className="text-center text-[#141B2D] lg:text-[1.2rem] sans mt-3 lg:w-[50vw] mx-auto">Discover a wide range of cutting-edge mobile phones with advanced features, stunning designs, and powerful performance.</p>
 
 
                 <form onSubmit={handleSearch}>
@@ -97,7 +102,7 @@ const AllMobile = () => {
                     </div>
                 </form>
 
-                <div className="mx-[10%] mt-12 flex items-center justify-center gap-4">
+                <div className="lg:mx-[10%] mt-12 flex flex-wrap items-center justify-center gap-4">
                     <details className="dropdown">
                         <summary className="m-1 btn bg-white btn-neutral border-[1px] text-lg text-black border-[#1C3988] hover:text-white">Choose the Brand <FaChevronDown /></summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
@@ -172,12 +177,19 @@ const AllMobile = () => {
             </div>
 
 
-            <div className="mx-[10%] mt-20 grid grid-cols-1 lg:grid-cols-3 justify-items-center items-center gap-8">
+            {
+                mobile.length>0 ?
+                <div className="mx-[10%] mt-20 grid grid-cols-1 lg:grid-cols-3 justify-items-center items-center gap-8">
                 {
                     mobile?.map(phone => <AllMobileCard key={phone?._id} phone={phone} />)
                 }
 
             </div>
+            :
+            <div>
+                <h1 className="text-center text-lg mt-12">Out Of Stock Please Browse more product</h1>
+            </div>
+            }
 
             <div className='text-center mb-10 space-x-4 md:space-x-6 mt-20'>
 

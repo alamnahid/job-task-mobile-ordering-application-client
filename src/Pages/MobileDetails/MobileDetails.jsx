@@ -2,7 +2,6 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { FaCarSide, FaCartPlus, FaShoppingBag, FaSignInAlt } from "react-icons/fa";
-import Zoom from "react-img-hover-zoom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
@@ -78,13 +77,8 @@ const MobileDetails = () => {
     return (
         <div className="mt-20">
             <div className="flex flex-col lg:flex-row lg:justify-evenly lg:items-center px-[7%] lg:px-0">
-                <Zoom
-                        img={data?.image}
-                        zoomScale={2}
-                        width={450}
-                        height={500}
-                        className="w-[450px] lg:w-[500px]"
-                    />
+                <img className="w-[450px] lg:w-[500px] shadow-sm" src={data?.image} alt="" />
+                
 
                 <div className="lg:w-[30vw]">
                     <h1 className="text-2xl font-medium ">{data?.modelname}</h1>
