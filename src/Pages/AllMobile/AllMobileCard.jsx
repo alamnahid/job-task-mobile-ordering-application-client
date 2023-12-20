@@ -19,7 +19,7 @@ const AllMobileCard = ({phone}) => {
                         <p className="text-[#1C3988] text-lg sans font-semibold pl-5">${phone?.price}</p>
                         <p className=" text-[#141B2D] sans pl-5">{phone?.location}</p>
                     </div>
-                    <Link to={`/allhouse/${phone?._id}`}><button className="btn btn-outline border-[#1C3988] text-lg border-2">See Details</button></Link>
+                    <Link to={`/all-mobile/${phone?._id}`}><button className="btn btn-outline border-[#1C3988] text-lg border-2">See Details</button></Link>
                 </div>
 
             </div>

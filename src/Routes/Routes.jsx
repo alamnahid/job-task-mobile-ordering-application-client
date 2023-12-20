@@ -5,6 +5,7 @@ import AddMobile from "../Pages/AddMobile/AddMobile";
 import SignUp from "../Pages/Signup/SignUp";
 import Login from "../Pages/Login/Login";
 import AllMobile from "../Pages/AllMobile/AllMobile";
+import MobileDetails from "../Pages/MobileDetails/MobileDetails";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         {
           path: '/all-mobile',
           element: <AllMobile/>
+        },
+        {
+          path: '/all-mobile/:id',
+          element: <MobileDetails/>
         }
       ]
     },
