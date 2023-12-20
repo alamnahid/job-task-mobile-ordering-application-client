@@ -29,13 +29,13 @@ const FeatureProduct = () => {
                         autoplay
                         breakpoints={{
                             320: {
-                                slidesPerView: 1, // 1 slide per view on small screens (mobile devices)
+                                slidesPerView: 1, 
                             },
                             768: {
-                                slidesPerView: 1.5, // 2 slides per view on tablets
+                                slidesPerView: 1.5, 
                             },
                             1024: {
-                                slidesPerView: 4.5, // 4 slides per view on desktop devices
+                                slidesPerView: 4.5, 
                             },
                         }}
 
