@@ -2,12 +2,41 @@ import Swal from "sweetalert2";
 import deleteicon from "../../assets/icon/delete.svg"
 import useCart from "../../hooks/usecart";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
   const axiosSecure = useAxiosSecure();
+  const {user} = useContext(AuthContext);
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+
+  const { mutate } = useMutation({
+    mutationKey: ['orders'],
+    mutationFn: (addingData) => {
+        return axios.post('http://localhost:5000/orders', addingData, { withCredentials: true, })
+    },
+    onSuccess: () => {
+        Swal.fire({
+            title: "Thank You for purchasing",
+            text: "Your order has been placed",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "OK"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // navigate('/')
+                refetch();
+            }
+        });
+    }
+
+})
 
   const handleDelete = id => {
     Swal.fire({
@@ -37,6 +66,20 @@ const MyCart = () => {
       }
     });
   }
+
+  const handlePlaceOrder = ()=>{
+    
+      mutate({
+        email: user.email,
+        price: totalPrice,
+        date: new Date(),
+        cartIds: cart.map(item=>item._id),
+        menuItemIds: cart.map(item=>item.mobile_Id),
+        status: 'pending'
+    })
+    refetch();
+
+  }
   return (
     <div className="lg:px-[10%] w-full  min-h-screen">
 
@@ -48,6 +91,11 @@ const MyCart = () => {
       <div className="flex justify-between items-center ">
         <h1 className="text-black lg:text-[2rem] cin font-bold">Items: {cart.length}</h1>
         <h1 className="text-black lg:text-[2rem] cin font-bold">Total Price: ${totalPrice}</h1>
+        {
+          cart.length ? <button onClick={handlePlaceOrder} className="btn btn-neutral text-white text-xl bg-[#1C3988] border-none">Place Order</button>
+          :
+          <button disabled className="btn btn-neutral text-white text-xl bg-[#1C3988] border-none">Place Order</button>
+        }
       </div>
 
 

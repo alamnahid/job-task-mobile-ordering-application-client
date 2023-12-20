@@ -7,11 +7,13 @@ import Login from "../Pages/Login/Login";
 import AllMobile from "../Pages/AllMobile/AllMobile";
 import MobileDetails from "../Pages/MobileDetails/MobileDetails";
 import MyCart from "../Pages/MyCart/MyCart";
+import ErrorElement from "../Components/ErrorElement/ErrorElement";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Root/>,
+      errorElement: <ErrorElement/>,
       children: [
         {
           path: '/',
