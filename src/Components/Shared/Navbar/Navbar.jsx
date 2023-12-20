@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
+    const { user, logOut } = useContext(AuthContext)
+    const handlelogOut = () => {
+        logOut()
+    }
     return (
         <div className="lg:mx-[10%] mt-3">
             <div className="navbar bg-base-100">
@@ -32,10 +37,14 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
 
+                   {
+                    user ? <Link to="/login"><button onClick={handlelogOut} className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">Logout</button></Link>
+                    :
                     <div>
-                        <Link to="/login"><button className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">Signin</button></Link>
-                        <Link to="/signup"><button className="btn border-none bg-[#1C3988] lg:w-[6rem] text-lg text-white ml-4 btn-neutral">Register</button></Link>
-                    </div>
+                    <Link to="/login"><button className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">Signin</button></Link>
+                    <Link to="/signup"><button className="btn border-none bg-[#1C3988] lg:w-[6rem] text-lg text-white ml-4 btn-neutral">Register</button></Link>
+                </div>
+                   }
                 </div>
             </div >
 
