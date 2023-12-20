@@ -12,7 +12,7 @@ const AllMobileCard = ({phone}) => {
                     <h1 className="text-white text-xl font-medium">{phone?.brandname}</h1>
                 </div>
                 </div>
-                <h1 className="text-[#141B2D] text-[1.32rem] font-semibold px-5 mt-6 merrin">{phone?.modelname}</h1>
+                <h1 className="text-[#141B2D] text-[1.32rem] font-semibold px-5 mt-6 ">{phone?.modelname}</h1>
                 <p className=" text-[#141B2D] sans pl-5">{phone?.sorage}</p>
                 <div className="flex mt-4 justify-between items-center pr-5">
                     <div>

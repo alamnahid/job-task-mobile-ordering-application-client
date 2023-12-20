@@ -83,7 +83,7 @@ const AllMobile = () => {
             <div className="bg-[#F3F3FA] py-8  rounded-md">
                 {/* <p>{house.length}</p> */}
 
-                <h1 className="merrin text-center text-[3rem] font-semibold text-[#141B2D]">Explore the Latest Mobiles</h1>
+                <h1 className=" text-center text-[3rem] font-semibold text-[#141B2D]">Explore the Latest Mobiles</h1>
                 <p className="text-center text-[#141B2D] text-[1.2rem] sans mt-3 w-[50vw] mx-auto">Discover a wide range of cutting-edge mobile phones with advanced features, stunning designs, and powerful performance.</p>
 
 
