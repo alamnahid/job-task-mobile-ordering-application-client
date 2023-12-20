@@ -58,7 +58,7 @@ const AddMobile = () => {
                 price: data.price,
                 type: data.type,
                 processor: data.processor,
-                sorage: data.sorage,
+                storage: data.storage,
                 battery: data.battery,
                 display: data.display,
                 camera: data.camera,
@@ -143,10 +143,10 @@ const AddMobile = () => {
                     </select>
 
 
-                    {/* sorage input  */}
+                    {/* storage input  */}
                     <p className="text-[#444] mt-5 text-xl font-semibold">Select the Storage</p>
 
-                    <select className="w-full mt-2 h-[3.5rem] text-gray-700 placeholder:text-[#A1A1A1] text-lg outline-none pl-[1.81rem] rounded-lg border-2 border-[#D0D0D0] bg-white" {...register("sorage", { required: true })}>
+                    <select className="w-full mt-2 h-[3.5rem] text-gray-700 placeholder:text-[#A1A1A1] text-lg outline-none pl-[1.81rem] rounded-lg border-2 border-[#D0D0D0] bg-white" {...register("storage", { required: true })}>
                         <option value="">Select Mobile Storage</option>
                         <option value="4/64">4GB RAM / 64GB ROM</option>
                         <option value="6/128">6GB RAM / 128GB ROM</option>
