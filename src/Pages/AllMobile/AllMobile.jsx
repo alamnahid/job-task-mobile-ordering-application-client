@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import searchicon from "../../assets/icon/search icon.svg"
+import { FaChevronDown } from "react-icons/fa";
+
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -14,6 +16,8 @@ const AllMobile = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [count, setCount] = useState(0)
+    const [brandName, setBrandName] = useState('')
+    const [asc, setAsc] = useState(true)
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -21,9 +25,9 @@ const AllMobile = () => {
         setSearch(search)
     }
     const { data: mobile = [], refetch } = useQuery({
-        queryKey: ['mobile', search, currentPage, itemsPerPage],
+        queryKey: ['mobile', search, currentPage, itemsPerPage, brandName, asc],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/allmobile?search=${search.toString()}&page=${currentPage}&size=${itemsPerPage}`)
+            const res = await axiosPublic.get(`/allmobile?sort=${asc ? 'asc' : 'des'}&modelname=${search.toString()}&page=${currentPage}&size=${itemsPerPage}&brandname=${brandName}`)
             return res.data;
         }
     })
@@ -90,33 +94,62 @@ const AllMobile = () => {
                     </div>
                 </form>
 
+                <div className="mx-[10%] mt-12 flex items-center gap-4">
+                    <details className="dropdown">
+                        <summary className="m-1 btn bg-white btn-neutral border-2 text-lg text-black border-[#1C3988] hover:text-white">Choose the Brand <FaChevronDown /></summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li><button onClick={() => setBrandName('Apple')} className="font-medium">Apple</button></li>
+                            <li><button onClick={() => setBrandName('Samsung')} className="font-medium">Samsung</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Oppo</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Vivo</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Xiaomi</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Redmi</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Realme</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Nokia</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Symphony</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Itel</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Sony</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Pixel</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Motorolla</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">OnePlus</button></li>
+                            <li><button onClick={() => setBrandName('')} className="font-medium">Lenovo</button></li>
+
+
+                        </ul>
+                    </details>
+
+                    <div>
+                    <button className="btn capitalize bg-white btn-neutral border-2 text-lg text-black border-[#1C3988] hover:text-white" onClick={()=>setAsc(!asc)}>{asc ? 'Sort Price High to Low' : 'Sort Price Low to High'}</button>
+                    </div>
+                </div>
+
             </div>
 
 
             <div className="mx-[10%] mt-20 grid grid-cols-1 lg:grid-cols-3 justify-items-center items-center gap-8">
                 {
-                    mobile?.map(phone=><AllMobileCard key={phone?._id} phone={phone} />)
+                    mobile?.map(phone => <AllMobileCard key={phone?._id} phone={phone} />)
                 }
-                
+
             </div>
 
             <div className='text-center mb-10 space-x-4 md:space-x-6 mt-20'>
-              
-              <button className="btn  btn-outline border-[#1C3988] border-4 md:w-[7rem] md:text-lg" onClick={handlePrevPage}>Prev</button>
-              {
-                  pages.map(page => <button
-                      className={currentPage === page ? 'btn bg-[#1C3988] text-xl font-bold text-white' : 'btn btn-outline border-[#1C3988] border-4 text-xl'}
-                      onClick={() => setCurrentPage(page)}
-                      key={page}
-                  >{page}</button>)
-              }
-              <button className="btn btn-outline border-[#1C3988] border-4 md:w-[7rem] md:text-lg" onClick={handleNextPage}>Next</button>
-              <select className="btn bg-[#1C3988] text-xl text-white" value={itemsPerPage} onChange={handleItemsPerPage} name="" id="">
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="50">50</option>
-              </select>
-          </div>
+
+                <button className="btn  btn-outline border-[#1C3988] border-4 md:w-[7rem] md:text-lg" onClick={handlePrevPage}>Prev</button>
+                {
+                    pages.map(page => <button
+                        className={currentPage === page ? 'btn bg-[#1C3988] text-xl font-bold text-white' : 'btn btn-outline border-[#1C3988] border-4 text-xl'}
+                        onClick={() => setCurrentPage(page)}
+                        key={page}
+                    >{page}</button>)
+                }
+                <button className="btn btn-outline border-[#1C3988] border-4 md:w-[7rem] md:text-lg" onClick={handleNextPage}>Next</button>
+                <select className="btn bg-[#1C3988] text-xl text-white" value={itemsPerPage} onChange={handleItemsPerPage} name="" id="">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
 
 
 
