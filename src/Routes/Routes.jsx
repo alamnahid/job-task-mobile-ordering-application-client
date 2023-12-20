@@ -6,6 +6,7 @@ import SignUp from "../Pages/Signup/SignUp";
 import Login from "../Pages/Login/Login";
 import AllMobile from "../Pages/AllMobile/AllMobile";
 import MobileDetails from "../Pages/MobileDetails/MobileDetails";
+import MyCart from "../Pages/MyCart/MyCart";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         {
           path: '/all-mobile/:id',
           element: <MobileDetails/>
+        },
+        {
+          path: '/cart',
+          element: <MyCart/>
         }
       ]
     },

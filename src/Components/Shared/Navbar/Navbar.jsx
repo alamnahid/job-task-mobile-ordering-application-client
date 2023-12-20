@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
-
+import { PiShoppingCartBold } from "react-icons/pi";
+import useCart from "../../../hooks/usecart";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const { user, logOut } = useContext(AuthContext)
+    const [cart] = useCart();
     const handlelogOut = () => {
         logOut()
     }
@@ -20,7 +22,7 @@ const Navbar = () => {
                         <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 ${open ? '' : 'hidden'}`}>
                             <li><NavLink className={({ isActive }) => isActive ? 'text-base border-none bg-[#1C3988] text-white' : 'text-base border-none text-black'} to='/'>Home</NavLink></li>
 
-                            
+
                         </ul>
                     </div>
                     {/* logo and name of the website  */}
@@ -33,20 +35,31 @@ const Navbar = () => {
                     <ul className=" menu-horizontal px-1">
                         <li><NavLink className={({ isActive }) => isActive ? 'btn btn-neutral text-base border-none bg-[#1C3988] text-white' : 'text-lg font-medium btn bg-white border-none shadow-none'} to='/'>Home</NavLink></li>
                         <li><NavLink className={({ isActive }) => isActive ? 'btn btn-neutral text-base border-none bg-[#1C3988] text-white' : 'text-lg font-medium btn bg-white border-none shadow-none'} to='/all-mobile'>Shop</NavLink></li>
+
+                        <li><NavLink className={({ isActive }) => isActive ? 'btn btn-neutral text-base border-none bg-[#1C3988] text-white' : 'text-lg font-medium btn bg-white border-none shadow-none'} to='/cart'>My Cart
+                            <button className="flex px-0 text-xl">
+                                <PiShoppingCartBold />
+                                <div className="badge badge-secondary">+{cart.length}</div>
+                            </button>
+                        </NavLink></li>
+
+
+
+
                         <li><NavLink className={({ isActive }) => isActive ? 'btn btn-neutral text-base border-none bg-[#1C3988] text-white' : 'text-lg font-medium btn bg-white border-none shadow-none'} to='/add-mobile'>Add Mobile</NavLink></li>
-                        
+
                     </ul>
                 </div>
                 <div className="navbar-end">
 
-                   {
-                    user ? <Link to="/login"><button onClick={handlelogOut} className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">Logout</button></Link>
-                    :
-                    <div>
-                    <Link to="/login"><button className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">Signin</button></Link>
-                    <Link to="/signup"><button className="btn border-none bg-[#1C3988] lg:w-[6rem] text-lg text-white ml-4 btn-neutral">Register</button></Link>
-                </div>
-                   }
+                    {
+                        user ? <Link to="/login"><button onClick={handlelogOut} className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">Logout</button></Link>
+                            :
+                            <div>
+                                <Link to="/login"><button className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">Signin</button></Link>
+                                <Link to="/signup"><button className="btn border-none bg-[#1C3988] lg:w-[6rem] text-lg text-white ml-4 btn-neutral">Register</button></Link>
+                            </div>
+                    }
                 </div>
             </div >
 

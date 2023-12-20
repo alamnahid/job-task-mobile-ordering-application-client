@@ -1,19 +1,75 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { FaCarSide, FaCartPlus, FaShoppingBag, FaSignInAlt } from "react-icons/fa";
 import Zoom from "react-img-hover-zoom";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/usecart";
 
 const MobileDetails = () => {
     const {id} = useParams();
     const axiosPublic = useAxiosPublic()
-    const { data, refetch, isLoading } = useQuery({
+    const { user} = useContext(AuthContext)
+    const navigate = useNavigate();
+    const location = useLocation();
+    const axiosSecure = useAxiosSecure();
+    const [, refetch] = useCart();
+
+    const { data, isLoading } = useQuery({
         queryKey: ['mobile', id],
         queryFn: async () => {
             const res = await axiosPublic.get(`/allmobile/${id}`)
             return res.data;
         }
     })
+
+    const handleAddtoCart = (mobile)=>{
+        if(user && user.email){
+        
+            const cartItem = {
+                mobile_Id: id,
+                email: user.email,
+                modelname: data?.modelname,
+                image: data?.image,
+                price: data?.price
+
+            }
+            axiosSecure.post('/carts', cartItem)
+            .then(res=>{
+                console.log(res.data)
+                if(res.data.insertedId){
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Product added to cart",
+                        showConfirmButton: false,
+                        timer: 1000
+                      });
+                      refetch()
+                }
+            })
+        }
+        else{
+                Swal.fire({
+                title: "You are not login",
+                text: "Please login to add to the cart",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Login!"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   //send
+                   navigate('/login', {state: {from: location}})
+                }
+                });
+        }
+
+    }
 
     console.log(data)
     return (
@@ -62,7 +118,7 @@ const MobileDetails = () => {
                     <p className="mt-4">{data?.description}</p>
 
                     <div className="flex gap-6">
-                        <button  className=" h-[3rem]  btn border-none bg-[#1C3988] l text-white  btn-neutral  rounded-lg   text-lg font-medium flex justify-center items-center gap-2 mt-6 w-full"><FaCartPlus /> Add to cart </button>
+                        <button onClick={()=>handleAddtoCart(data)} className=" h-[3rem]  btn border-none bg-[#1C3988] l text-white  btn-neutral  rounded-lg   text-lg font-medium flex justify-center items-center gap-2 mt-6 w-full"><FaCartPlus /> Add to cart </button>
                     </div>
                 </div>
             </div>
