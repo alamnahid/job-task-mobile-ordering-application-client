@@ -18,6 +18,9 @@ const AllMobile = () => {
     const [count, setCount] = useState(0)
     const [brandName, setBrandName] = useState('')
     const [asc, setAsc] = useState(true)
+    const [mobiletype, setMobileType] = useState('')
+    const [mobileProcessor, setMobileProcessor] = useState('')
+    const [mobileStorage, setMobileStorage] = useState('')
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -25,9 +28,9 @@ const AllMobile = () => {
         setSearch(search)
     }
     const { data: mobile = [], refetch } = useQuery({
-        queryKey: ['mobile', search, currentPage, itemsPerPage, brandName, asc],
+        queryKey: ['mobile', search, currentPage, itemsPerPage, brandName, mobiletype, mobileProcessor, mobileStorage, asc],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/allmobile?sort=${asc ? 'asc' : 'des'}&modelname=${search.toString()}&page=${currentPage}&size=${itemsPerPage}&brandname=${brandName}`)
+            const res = await axiosPublic.get(`/allmobile?modelname=${search.toString()}&page=${currentPage}&size=${itemsPerPage}&brandname=${brandName}&type=${mobiletype}&processor=${mobileProcessor}&storage=${mobileStorage}&sort=${asc ? 'asc' : 'des'}`)
             return res.data;
         }
     })
@@ -94,33 +97,76 @@ const AllMobile = () => {
                     </div>
                 </form>
 
-                <div className="mx-[10%] mt-12 flex items-center gap-4">
+                <div className="mx-[10%] mt-12 flex items-center justify-center gap-4">
                     <details className="dropdown">
-                        <summary className="m-1 btn bg-white btn-neutral border-2 text-lg text-black border-[#1C3988] hover:text-white">Choose the Brand <FaChevronDown /></summary>
+                        <summary className="m-1 btn bg-white btn-neutral border-[1px] text-lg text-black border-[#1C3988] hover:text-white">Choose the Brand <FaChevronDown /></summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                             <li><button onClick={() => setBrandName('Apple')} className="font-medium">Apple</button></li>
                             <li><button onClick={() => setBrandName('Samsung')} className="font-medium">Samsung</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Oppo</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Vivo</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Xiaomi</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Redmi</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Realme</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Nokia</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Symphony</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Itel</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Sony</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Pixel</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Motorolla</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">OnePlus</button></li>
-                            <li><button onClick={() => setBrandName('')} className="font-medium">Lenovo</button></li>
+                            <li><button onClick={() => setBrandName('Oppo')} className="font-medium">Oppo</button></li>
+                            <li><button onClick={() => setBrandName('Vivo')} className="font-medium">Vivo</button></li>
+                            <li><button onClick={() => setBrandName('Xiaomi')} className="font-medium">Xiaomi</button></li>
+                            <li><button onClick={() => setBrandName('Redmi')} className="font-medium">Redmi</button></li>
+                            <li><button onClick={() => setBrandName('Realme')} className="font-medium">Realme</button></li>
+                            <li><button onClick={() => setBrandName('Nokia')} className="font-medium">Nokia</button></li>
+                            <li><button onClick={() => setBrandName('Symphony')} className="font-medium">Symphony</button></li>
+                            <li><button onClick={() => setBrandName('Itel')} className="font-medium">Itel</button></li>
+                            <li><button onClick={() => setBrandName('Sony')} className="font-medium">Sony</button></li>
+                            <li><button onClick={() => setBrandName('Pixel')} className="font-medium">Pixel</button></li>
+                            <li><button onClick={() => setBrandName('Motorolla')} className="font-medium">Motorolla</button></li>
+                            <li><button onClick={() => setBrandName('OnePlus')} className="font-medium">OnePlus</button></li>
+                            <li><button onClick={() => setBrandName('Lenovo')} className="font-medium">Lenovo</button></li>
 
 
                         </ul>
                     </details>
 
                     <div>
-                    <button className="btn capitalize bg-white btn-neutral border-2 text-lg text-black border-[#1C3988] hover:text-white" onClick={()=>setAsc(!asc)}>{asc ? 'Sort Price High to Low' : 'Sort Price Low to High'}</button>
+                    <button className="btn capitalize bg-white btn-neutral border-[1px] text-lg text-black border-[#1C3988] hover:text-white" onClick={()=>setAsc(!asc)}>{asc ? 'Sort Price High to Low' : 'Sort Price Low to High'}</button>
                     </div>
+
+                    <details className="dropdown">
+                        <summary className="m-1 btn bg-white btn-neutral border-[1px] text-lg text-black border-[#1C3988] hover:text-white">Sort By Type <FaChevronDown /></summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li><button onClick={() => setMobileType('Smartphone')} className="font-medium">Smartphone</button></li>
+                            <li><button onClick={() => setMobileType('Tablet')} className="font-medium">Tablet</button></li>
+                            <li><button onClick={() => setMobileType('Flip Phones')} className="font-medium">Flip Phones</button></li>
+                            <li><button onClick={() => setMobileType('Others')} className="font-medium">Others</button></li>
+                        </ul>
+                    </details>
+
+
+                    <details className="dropdown">
+                        <summary className="m-1 btn bg-white btn-neutral border-[1px] text-lg text-black border-[#1C3988] hover:text-white">Sort By Processor <FaChevronDown /></summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li><button onClick={() => setMobileProcessor('Snapdragon 888')} className="font-medium">Snapdragon 888</button></li>
+                            <li><button onClick={() => setMobileProcessor('Apple A15 Bionic')} className="font-medium">Apple A15 Bionic</button></li>
+                            <li><button onClick={() => setMobileProcessor('Exynos 2100')} className="font-medium">Exynos 2100</button></li>
+                            <li><button onClick={() => setMobileProcessor('MediaTek Dimensity 1200')} className="font-medium">MediaTek Dimensity 1200</button></li>
+                            <li><button onClick={() => setMobileProcessor('Kirin 9000')} className="font-medium">Kirin 9000</button></li>
+                            <li><button onClick={() => setMobileProcessor('Snapdragon 870')} className="font-medium">Snapdragon 870</button></li>
+                            <li><button onClick={() => setMobileProcessor('Apple A14 Bionic')} className="font-medium">Apple A14 Bionic</button></li>
+                            <li><button onClick={() => setMobileProcessor('Snapdragon 765G')} className="font-medium">Snapdragon 765G</button></li>
+                            <li><button onClick={() => setMobileProcessor('MediaTek Helio G95')} className="font-medium">MediaTek Helio G95</button></li>
+                            <li><button onClick={() => setMobileProcessor('Exynos 990')} className="font-medium">Exynos 990</button></li>
+                            <li><button onClick={() => setMobileProcessor('Others')} className="font-medium">Others</button></li>
+                        </ul>
+                    </details>
+
+                    <details className="dropdown">
+                        <summary className="m-1 btn bg-white btn-neutral border-[1px] text-lg text-black border-[#1C3988] hover:text-white">Sort By Storage <FaChevronDown /></summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li><button onClick={() => setMobileStorage('4/64')} className="font-medium">4GB RAM / 64GB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('8/256')} className="font-medium">6GB RAM / 128GB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('12/512')} className="font-medium">12GB RAM / 512GB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('16/1TB')} className="font-medium">16GB RAM / 1TB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('6/64')} className="font-medium">6GB RAM / 64GB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('8/128')} className="font-medium">8GB RAM / 128GB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('12/256')} className="font-medium">12GB RAM / 256GB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('16/512')} className="font-medium">16GB RAM / 512GB ROM</button></li>
+                            <li><button onClick={() => setMobileStorage('24/1TB')} className="font-medium">24GB RAM / 1TB ROM</button></li>
+                        </ul>
+                    </details>
                 </div>
 
             </div>
