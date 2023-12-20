@@ -1,39 +1,64 @@
-import featurephoto from "../../../assets/feature.png"
+import FeatureProductCard from "./FeatureProductCard";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import { Link } from "react-router-dom";
 
 const FeatureProduct = () => {
     return (
         <div className="mt-20 mx-[10%]">
+            <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
                 <div className="w-[1.25rem] h-[2.5rem] bg-[#1C3988]">
-
-
                 </div>
                 <h1 className="text-[#1C3988] text-2xl font-semibold">Feature Product</h1>
             </div>
-
-            <div className="flex gap-8">
-                <div className="mt-6 w-[17rem] h-[30rem] relative">
-                    <img className="w-full h-full" src={featurephoto} alt="" />
-                    <h1 className="text-2xl font-semibold absolute bottom-4 text-white text-center left-[2.52rem]">Upto 50% <br />flat discount</h1>
-                </div>
-
-                <div className="mt-6">
-                    <div className="w-[11rem] h-[14.5rem] rounded-[0.412rem] border-[0.7px] border-[#EAEAEA] bg-white hover:shadow-xl hover:shadow-[#1C3988]">
-                        <img className="w-[5.5rem] rounded-sm h-[6.7rem] mx-auto mt-[0.9rem]" src={featurephoto} alt="" />
-                        <div className="w-[11rem] h-[5.8rem] bg-[#EAEAEA] mt-4 rounded-b-lg">
-                            <h1 className="text-xs font-semibold px-2 pt-2 ">Samsung ultra edge AMOLED phone</h1>
-
-                            <div className="px-2 mt-3 flex justify-between items-center">
-                                <p>$300</p>
-                                <button className="btn btn-neutral text-white h-[2rem] bg-[#1C3988] btn-xs">View Details</button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                   
-                </div>
+            <Link to='/all-mobile'><button className="btn btn-outline border-[#1C3988] lg:w-[6rem] text-lg border-2">See All</button></Link>
             </div>
+
+            <div className="mt-6">
+                    <Swiper
+                        slidesPerView={4}
+                        spaceBetween={30}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        modules={[Pagination]}
+                        className="mySwiper mt-12"
+                        autoplay
+                        breakpoints={{
+                            320: {
+                                slidesPerView: 1, // 1 slide per view on small screens (mobile devices)
+                            },
+                            768: {
+                                slidesPerView: 1.5, // 2 slides per view on tablets
+                            },
+                            1024: {
+                                slidesPerView: 4.5, // 4 slides per view on desktop devices
+                            },
+                        }}
+
+                    >
+                        <SwiperSlide className='pb-12'>
+                            <FeatureProductCard />
+                        </SwiperSlide>
+                        <SwiperSlide className='pb-12'>
+                            <FeatureProductCard />
+                        </SwiperSlide>
+                        <SwiperSlide className='pb-12'>
+                            <FeatureProductCard />
+                        </SwiperSlide>
+                        <SwiperSlide className='pb-12'>
+                            <FeatureProductCard />
+                        </SwiperSlide>
+                        <SwiperSlide className='pb-12'>
+                            <FeatureProductCard />
+                        </SwiperSlide>
+
+                    </Swiper>
+
+                </div>
 
         </div>
     );
